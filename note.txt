@@ -1,0 +1,12 @@
+date:
+    lesson{time, subj}
+    lesson{time, subj}
+
+for time:
+    for date:
+        if date exists:
+            for lesson:
+                if time:
+                    print subj
+                    
+        

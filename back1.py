@@ -174,20 +174,19 @@ with open(OUT_PATH, "w") as f:
     
     dates = generate_dates(start_date, end_date)
     #print(dates)
-    f.write("\t")
-    f.write("\t".join([d.strftime("%d.%m")]))
-    for time in ["8:30-10:00", "10:20-11:50", "12:30-14:00", "14:20-15:50", "16:10-17:40", "17.50-19:20", "19:30-21:00"]:
-        f.write(time)
-        f.write("\t")
-        for date in dates:
-            if date in days.keys():
-                day = days[date]
-                lesson = ""
-                for l in day:
-                    if l[TokenType.TIME] == time:
-                        lesson = l[TokenType.SUBJ]
-                f.write(lesson)
+    # days:
+    #   date - lesson:
+    f.write("\t" + "\t".join(["8:30-10:00", "10:20-11:50", "12:30-14:00", "14:20-15:50", "16:10-17:40", "17:50-19:20", "19:30-21:00"]))           
+    for date in dates:
+        f.write(date+"\t")
+        if not(date in days.keys()): continue
+        day = days[date]
+        for time in ["8:30-10:00", "10:20-11:50", "12:30-14:00", "14:20-15:50", "16:10-17:40", "17:50-19:20", "19:30-21:00"]:
+            for lesson in day:
+                if lesson[TokenType.TIME] == time:
+                    f.write(lesson[TokenType.SUBJ])
             f.write("\t")
         f.write("\n")
+
 
 
